@@ -1,0 +1,40 @@
+# Arduino build files
+*.ino.*
+/build/
+*.hex
+*.elf
+*.d
+
+# Python bytecode and build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor and IDE directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Log files
+*.log
+
+# Other temporary files or directories
+output/
+temp/
+.dist/
+.vscode/

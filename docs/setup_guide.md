@@ -1,0 +1,1 @@
+just follow the manual in the docs folder
