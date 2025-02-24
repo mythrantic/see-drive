@@ -1,6 +1,6 @@
 Royalty-Share Open-Source License (RSOSL) v1.0
 
-Copyright (c) 2024 valiantlynx
+Copyright (c) 2025 valiantlynx
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software with the following conditions:
 
