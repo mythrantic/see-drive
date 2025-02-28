@@ -148,8 +148,13 @@ RViz2 does not run out of the box and segfaults on launch (related to rendering 
 QT_QPA_PLATFORM=xcb rviz2
 ```
 
----
+### nice to have features.
+as youve seen we have to source ros2 all the time before we can run the command. to save ourselved pain you could add it to bashrc so its ran on startup
+```bash
+echo "source ~/ros2_iron/install/local_setup.bash" >> ~/.bashrc
+```
 
+---
 ## Conclusion
 
 In this post, I demonstrated how to build ROS 2 iron on Ubuntu 23.10 on Raspberry Pi 5. Though it compiles, I have yet to thoroughly test the stability and viability of this setup. Perhaps using the Docker approach is not that bad after all…
