@@ -13,3 +13,5 @@ for colcon on windows:
 check this out after youve installed ros2: https://www.youtube.com/watch?v=HHM_cjfiy3c
 
 unfortunately, i cant install ros2 on windows 11. i was stuck at trying to run the colcon build. it failed with code errors. nothing to do with envaronment variables etc. if i follow th error. they ere fixable. but i cant be bothered
+
+https://docs.ros.org/en/humble/p/rplidar_ros/
