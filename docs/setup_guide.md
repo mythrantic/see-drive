@@ -16,3 +16,12 @@ unfortunately, i cant install ros2 on windows 11. i was stuck at trying to run t
 
 https://docs.ros.org/en/humble/p/rplidar_ros/
 https://www.armbian.com/jetson-nano/
+
+
+
+
+after cloning this project run:
+colcon build --symlink-install ## build the workspace
+source install/setup.bash ## source the overlay workspace
+ros2 launch my_package talker.launch.py
+ros2 launch my_package listener.launch.py
