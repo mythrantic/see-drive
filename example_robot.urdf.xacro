@@ -173,7 +173,7 @@
     </link>
 
 
-    <xacro:include filename="example_gazebo.xacro" />
+    <!--xacro:include filename="example_gazebo.xacro" --/>
 
 
 </robot>
