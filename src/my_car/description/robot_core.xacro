@@ -48,7 +48,7 @@
     <link name="left_wheel">
         <visual>
             <geometry>
-                <cylinder radius="0.05" length="0.4"/>
+                <cylinder radius="0.05" length="0.04"/>
             </geometry>
             <material name="blue"/>
         </visual>
@@ -66,7 +66,7 @@
     <link name="right_wheel">
         <visual>
             <geometry>
-                <cylinder radius="0.05" length="0.4"/>
+                <cylinder radius="0.05" length="0.04"/>
             </geometry>
             <material name="blue"/>
         </visual>
