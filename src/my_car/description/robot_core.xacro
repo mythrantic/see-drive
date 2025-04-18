@@ -14,8 +14,11 @@
         <color rgba="0.2 0.2 1 1"/>
     </material>
 
+    <!-- Base link-->
     <link name="base_link">
     </link>
+
+    <!-- Chassis link-->
 
     <joint name="chassis_joint" type="fixed">
         <parent link="base_link"/>
@@ -32,4 +35,6 @@
             <material name="white"/>
         </visual>
     </link>
+
+    <!-- Left Wheel link-->
 </robot>
