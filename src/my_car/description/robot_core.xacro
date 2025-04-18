@@ -37,4 +37,38 @@
     </link>
 
     <!-- Left Wheel link-->
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="0 0.175 0" rpy="-${pi/2} 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    
+    <link name="left_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.4"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <!-- right Wheel link-->
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="0 -0.175 0" rpy="${pi/2} 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    
+    <link name="right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.4"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
 </robot>
