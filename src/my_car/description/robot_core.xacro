@@ -71,4 +71,21 @@
             <material name="blue"/>
         </visual>
     </link>
+
+    <!-- Caster Wheel link-->
+    <joint name="caster_wheel_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="caster_wheel"/>
+        <origin xyz="0.24 0 0"/>
+    </joint>
+
+    <link name="caster_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    
 </robot>
