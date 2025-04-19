@@ -12,7 +12,7 @@ Note that each directory currently has at least one file in it to ensure that gi
 colcon build --symlink-install
 source install/setup.bash
 
-# Run the package
+# Run the package<
 ros2 run joint_state_publisher_gui joint_state_publisher_gui
 ros2 launch my_car rsp.launch.py
 rviz2
