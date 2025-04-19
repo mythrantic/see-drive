@@ -15,5 +15,7 @@ source install/setup.bash
 # Run the package<
 ros2 run joint_state_publisher_gui joint_state_publisher_gui
 ros2 launch my_car rsp.launch.py
-rviz2
+rviz2 
+# or with a specific config
+rviz2 -d src/my_car/config/view_bot.rviz
 ```
