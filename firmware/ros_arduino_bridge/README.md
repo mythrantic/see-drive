@@ -46,3 +46,11 @@ Some quick things to note
 - Make the speed input counts per second
 - Add/test more driver boards
 - Add/test other functionality
+
+# useful commands
+```bash
+# install miniterm for testing
+sudo apt install python3-serial
+
+miniterm -p /dev/ttyUSB0 -b 57600
+```
