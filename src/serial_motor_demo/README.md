@@ -45,5 +45,20 @@ Has two modes, one for raw PWM input (-255 to 255) and one for closed-loop contr
 - Stability improvements
 - More parameterisation
 
+# useful commands
+```bash
+sudo usermod -a -G dialout $USER # add user to dialout group
+sudo chmod 666 /dev/ttyACM0 # set permissions for serial port, this is temp and will reset on reboot
+```
 
+```bash
+# run the driver
+ros2 run serial_motor_demo driver --ros-args -p encoder_cpr:=3440 -p loop_rate:=30 -p serial_port:=/dev/ttyACM0
+ -p baud_rate:=57600
+```
+
+```bash
+# run the GUI
+ros2 run serial_motor_demo gui
+```
 
