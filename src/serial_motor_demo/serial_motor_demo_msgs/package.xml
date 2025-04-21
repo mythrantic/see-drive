@@ -3,9 +3,9 @@
 <package format="3">
   <name>serial_motor_demo_msgs</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="josh.newans@gmail.com">newans</maintainer>
-  <license>TODO: License declaration</license>
+  <description>package for serial motor messaging</description>
+  <maintainer email="valiantlynxz@gmail.com">valiantlynx</maintainer>
+  <license>see the LICENCE.md in the root of the project</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

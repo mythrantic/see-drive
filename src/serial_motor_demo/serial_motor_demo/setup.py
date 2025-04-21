@@ -13,11 +13,13 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='newans',
-    maintainer_email='josh.newans@gmail.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
-    tests_require=['pytest'],
+    maintainer='valiantlynx',
+    maintainer_email='valiantlynxz@gmail.com',
+    description='the package for serial motor demo',
+    license='Look at the LICENSE file in the root directory',
+    extras_require={
+        'test': ['pytest'],
+    },
     entry_points={
         'console_scripts': [
             'gui = serial_motor_demo.gui:main',
