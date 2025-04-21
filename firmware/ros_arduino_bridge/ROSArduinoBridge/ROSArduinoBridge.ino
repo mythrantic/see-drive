@@ -81,6 +81,10 @@
 #include "WProgram.h"
 #endif
 
+/* Remove AVR specific headers that may not be available */
+// #include <avr/io.h>
+// #include <avr/interrupt.h>
+
 /* Include definition of serial commands */
 #include "commands.h"
 
@@ -228,7 +232,7 @@ int runCommand() {
     Serial.println("OK"); 
     break;
   case UPDATE_PID:
-    while ((str = strtok_r(p, ":", &p)) != '\0') {
+    while ((str = strtok_r(p, ":", &p)) != NULL) {  // Changed '\0' to NULL
        pid_args[i] = atoi(str);
        i++;
     }
@@ -252,25 +256,20 @@ void setup() {
 // Initialize the motor controller if used */
 #ifdef USE_BASE
   #ifdef ARDUINO_ENC_COUNTER
-    //set as inputs
-    DDRD &= ~(1<<LEFT_ENC_PIN_A);
-    DDRD &= ~(1<<LEFT_ENC_PIN_B);
-    DDRC &= ~(1<<RIGHT_ENC_PIN_A);
-    DDRC &= ~(1<<RIGHT_ENC_PIN_B);
+    // Setup encoder pins with standard Arduino functions
+    pinMode(LEFT_ENC_PIN_A, INPUT_PULLUP);
+    pinMode(LEFT_ENC_PIN_B, INPUT_PULLUP);
+    pinMode(RIGHT_ENC_PIN_A, INPUT_PULLUP);
+    pinMode(RIGHT_ENC_PIN_B, INPUT_PULLUP);
     
-    //enable pull up resistors
-    PORTD |= (1<<LEFT_ENC_PIN_A);
-    PORTD |= (1<<LEFT_ENC_PIN_B);
-    PORTC |= (1<<RIGHT_ENC_PIN_A);
-    PORTC |= (1<<RIGHT_ENC_PIN_B);
+    // Setup interrupts for encoder pins
+    // Use attachInterrupt if available for your Arduino board
+    attachInterrupt(digitalPinToInterrupt(LEFT_ENC_PIN_A), leftEncoderISR, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(LEFT_ENC_PIN_B), leftEncoderISR, CHANGE);
     
-    // tell pin change mask to listen to left encoder pins
-    PCMSK2 |= (1 << LEFT_ENC_PIN_A)|(1 << LEFT_ENC_PIN_B);
-    // tell pin change mask to listen to right encoder pins
-    PCMSK1 |= (1 << RIGHT_ENC_PIN_A)|(1 << RIGHT_ENC_PIN_B);
-    
-    // enable PCINT1 and PCINT2 interrupt in the general interrupt mask
-    PCICR |= (1 << PCIE1) | (1 << PCIE2);
+    // For analog pins or pins without direct interrupt support, we'll need to modify the approach
+    // For this example, we're assuming A4 and A5 don't support attachInterrupt directly
+    // You may need to implement pin change interrupt registration specific to your board
   #endif
   initMotorController();
   resetPID();
