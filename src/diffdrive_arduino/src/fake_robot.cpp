@@ -1,19 +1,16 @@
 #include "diffdrive_arduino/fake_robot.h"
-
-
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
-
+#include "rclcpp/rclcpp.hpp"
 
 FakeRobot::FakeRobot()
   : logger_(rclcpp::get_logger("FakeRobot"))
 {}
 
-
-
-return_type FakeRobot::configure(const hardware_interface::HardwareInfo & info)
+hardware_interface::CallbackReturn FakeRobot::on_init(const hardware_interface::HardwareInfo & info)
 {
-  if (configure_default(info) != return_type::OK) {
-    return return_type::ERROR;
+  if (hardware_interface::SystemInterface::on_init(info) != hardware_interface::CallbackReturn::SUCCESS)
+  {
+    return hardware_interface::CallbackReturn::ERROR;
   }
 
   RCLCPP_INFO(logger_, "Configuring...");
@@ -22,7 +19,6 @@ return_type FakeRobot::configure(const hardware_interface::HardwareInfo & info)
 
   cfg_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
   cfg_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
-
 
   // Set up the wheels
   // Note: It doesn't matter that we haven't set encoder counts per rev
@@ -33,8 +29,7 @@ return_type FakeRobot::configure(const hardware_interface::HardwareInfo & info)
 
   RCLCPP_INFO(logger_, "Finished Configuration");
 
-  status_ = hardware_interface::status::CONFIGURED;
-  return return_type::OK;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
 std::vector<hardware_interface::StateInterface> FakeRobot::export_state_interfaces()
@@ -63,57 +58,41 @@ std::vector<hardware_interface::CommandInterface> FakeRobot::export_command_inte
   return command_interfaces;
 }
 
-
-return_type FakeRobot::start()
+hardware_interface::CallbackReturn FakeRobot::on_activate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(logger_, "Starting Controller...");
-  status_ = hardware_interface::status::STARTED;
-
-  return return_type::OK;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-return_type FakeRobot::stop()
+hardware_interface::CallbackReturn FakeRobot::on_deactivate(const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(logger_, "Stopping Controller...");
-  status_ = hardware_interface::status::STOPPED;
-
-  return return_type::OK;
+  return hardware_interface::CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type FakeRobot::read()
+hardware_interface::return_type FakeRobot::read(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-
-  // TODO fix chrono duration
-
   // Calculate time delta
   auto new_time = std::chrono::system_clock::now();
   std::chrono::duration<double> diff = new_time - time_;
   double deltaSeconds = diff.count();
   time_ = new_time;
 
-
   // Force the wheel position
   l_wheel_.pos = l_wheel_.pos + l_wheel_.vel * deltaSeconds;
   r_wheel_.pos = r_wheel_.pos + r_wheel_.vel * deltaSeconds;
 
   return return_type::OK;
-
-  
 }
 
-hardware_interface::return_type FakeRobot::write()
+hardware_interface::return_type FakeRobot::write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-
   // Set the wheel velocities to directly match what is commanded
-
   l_wheel_.vel = l_wheel_.cmd;
   r_wheel_.vel = r_wheel_.cmd;
 
-
   return return_type::OK;  
 }
-
-
 
 #include "pluginlib/class_list_macros.hpp"
 
