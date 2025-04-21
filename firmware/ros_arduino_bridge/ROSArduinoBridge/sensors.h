@@ -1,5 +1,9 @@
 /* Functions for various sensor types */
 
+// Default ultrasonic pins from custom_test.ino
+#define ULTRASONIC_TRIG_PIN A1  // outputPin in custom_test
+#define ULTRASONIC_ECHO_PIN A0  // inputPin in custom_test
+
 float microsecondsToCm(long microseconds)
 {
   // The speed of sound is 340 m/s or 29 microseconds per cm.
@@ -8,27 +12,26 @@ float microsecondsToCm(long microseconds)
   return microseconds / 29 / 2;
 }
 
+// Updated to match the implementation in custom_test.ino
 long Ping(int pin) {
-  long duration, range;
+  long duration, distance_cm;
 
-  // The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
-  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-  pinMode(pin, OUTPUT);
-  digitalWrite(pin, LOW);
+  // Using the custom_test.ino implementation
+  digitalWrite(ULTRASONIC_TRIG_PIN, LOW);
   delayMicroseconds(2);
-  digitalWrite(pin, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pin, LOW);
-
-  // The same pin is used to read the signal from the PING))): a HIGH
-  // pulse whose duration is the time (in microseconds) from the sending
-  // of the ping to the reception of its echo off of an object.
-  pinMode(pin, INPUT);
-  duration = pulseIn(pin, HIGH);
-
-  // convert the time into meters
-  range = microsecondsToCm(duration);
+  digitalWrite(ULTRASONIC_TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(ULTRASONIC_TRIG_PIN, LOW);
   
-  return(range);
+  duration = pulseIn(ULTRASONIC_ECHO_PIN, HIGH);
+  distance_cm = duration / 5.8 / 10; // Match custom_test calculation
+  
+  return distance_cm;
+}
+
+// Function to set up the ultrasonic sensor pins
+void setupUltrasonicPins() {
+  pinMode(ULTRASONIC_ECHO_PIN, INPUT);
+  pinMode(ULTRASONIC_TRIG_PIN, OUTPUT);
 }
 

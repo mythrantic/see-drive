@@ -253,6 +253,9 @@ int runCommand() {
 void setup() {
   Serial.begin(BAUDRATE);
 
+  // Setup ultrasonic sensor pins
+  setupUltrasonicPins();
+
 // Initialize the motor controller if used */
 #ifdef USE_BASE
   #ifdef ARDUINO_ENC_COUNTER
@@ -292,6 +295,15 @@ void setup() {
    interval and check for auto-stop conditions.
 */
 void loop() {
+  // Poll right encoder if not using interrupts
+  #ifdef USE_BASE
+  #ifdef ARDUINO_ENC_COUNTER
+  #ifndef RIGHT_ENCODER_INTERRUPT
+    pollRightEncoder();
+  #endif
+  #endif
+  #endif
+
   while (Serial.available() > 0) {
     
     // Read the next character

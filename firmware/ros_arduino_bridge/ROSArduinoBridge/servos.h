@@ -1,22 +1,17 @@
 #ifndef SERVOS_H
 #define SERVOS_H
 
+// Only using 1 servo for the ultrasonic sensor, as in custom_test.ino
+#define N_SERVOS 1
 
-#define N_SERVOS 2
+// Servo sweep delay
+int stepDelay [N_SERVOS] = { 20 }; // ms - moderate speed for smooth movement
 
-// This delay in milliseconds determines the pause 
-// between each one degree step the servo travels.  Increasing 
-// this number will make the servo sweep more slowly.  
-// Decreasing this number will make the servo sweep more quickly.
-// Zero is the default number and will make the servos spin at
-// full speed.  150 ms makes them spin very slowly.
-int stepDelay [N_SERVOS] = { 0, 0 }; // ms
+// Pins - using pin 5 as in custom_test.ino
+byte servoPins [N_SERVOS] = { 5 };
 
-// Pins
-byte servoPins [N_SERVOS] = { 3, 4 };
-
-// Initial Position
-byte servoInitPosition [N_SERVOS] = { 90, 90 }; // [0, 180] degrees
+// Initial Position - center position
+byte servoInitPosition [N_SERVOS] = { 90 }; // [0, 180] degrees
 
 
 class SweepServo
